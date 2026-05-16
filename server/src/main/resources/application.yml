@@ -1,0 +1,55 @@
+﻿spring:
+  application:
+    name: campus-ai-server
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/campus_ai?useUnicode=true&characterEncoding=utf-8&serverTimezone=Asia/Shanghai&useSSL=false&allowPublicKeyRetrieval=true
+    username: root
+    password: ${DB_PASSWORD}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  sql:
+    init:
+      mode: always
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+server:
+  port: 8080
+  max-http-request-header-size: 64KB
+  servlet:
+    encoding:
+      charset: UTF-8
+      enabled: true
+      force: true
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration: 86400000
+
+ollama:
+  base-url: http://localhost:11434
+  model: qwen3:8b
+  embedding-model: nomic-embed-text:latest
+
+logging:
+  level:
+    org.springframework.security: WARN
+    org.apache.catalina: WARN
+    org.hibernate: WARN
+    org.springframework.web: WARN
+    com.campusai: INFO
